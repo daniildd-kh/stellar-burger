@@ -1,36 +1,41 @@
 import { FC, useMemo } from 'react';
 import { TConstructorIngredient } from '@utils-types';
 import { BurgerConstructorUI } from '@ui';
+import { useSelector } from '../../services/store';
 
-export const BurgerConstructor: FC = () =>
-  // const onOrderClick = () => {
-  // if (!user) {
-  //   navigate('/login');
-  //   return;
-  // }
-  // if (!constructorItems.bun || orderRequest) return;
-  // };
-  // const closeOrderModal = () => {};
+export const BurgerConstructor: FC = () => {
+  /** TODO: взять переменные constructorItems, orderRequest и orderModalData из стора */
 
-  // const price = useMemo(
-  //   () =>
-  //     (constructorItems.bun ? constructorItems.bun.price * 2 : 0) +
-  //     constructorItems.ingredients.reduce(
-  //       (s: number, v: TConstructorIngredient) => s + v.price,
-  //       0
-  //     ),
-  //   [constructorItems]
-  // );
+  const constructorItems = useSelector(state => state.constructorSlice);
 
-  // return (
-  //   <BurgerConstructorUI
-  //     price={price}
-  //     orderRequest={orderRequest}
-  //     constructorItems={constructorItems}
-  //     orderModalData={orderModalData}
-  //     onOrderClick={onOrderClick}
-  //     closeOrderModal={closeOrderModal}
-  //   />
-  // );
+  // запрос на заказ на сервер, должен выдать ответ 
+  const orderRequest = false; 
 
-  null;
+  const orderModalData = null;
+
+  const onOrderClick = () => {
+    if (!constructorItems.bun || orderRequest) return;
+  };
+  const closeOrderModal = () => {};
+
+  const price = useMemo(
+    () =>
+      (constructorItems.bun ? constructorItems.bun.price * 2 : 0) +
+      constructorItems.ingredients.reduce(
+        (s: number, v: TConstructorIngredient) => s + v.price,
+        0
+      ),
+    [constructorItems]
+  );
+
+  return (
+    <BurgerConstructorUI
+      price={price}
+      orderRequest={orderRequest}
+      constructorItems={constructorItems}
+      orderModalData={orderModalData}
+      onOrderClick={onOrderClick}
+      closeOrderModal={closeOrderModal}
+    />
+  );
+};
