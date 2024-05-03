@@ -3,15 +3,16 @@ import { FeedUI } from '@ui-pages';
 import { TOrder } from '@utils-types';
 import { FC, useEffect } from 'react';
 import { useSelector, useDispatch } from '../../services/store';
-import { getFeeds } from '../../services/reducers/actions';
+import { getFeeds } from '../../services/actions';
 
 export const Feed: FC = () => {
-  const orders: TOrder[] = useSelector(state => state.feedsSlice.orders?.orders) || [];
-  const isLoading = useSelector(state => state.feedsSlice.isLoading)
+  const orders: TOrder[] =
+    useSelector((state) => state.feedsSlice.orders?.orders) || [];
+  const isLoading = useSelector((state) => state.feedsSlice.isLoading);
   const dispatch = useDispatch();
-  
+
   useEffect(() => {
-    dispatch(getFeeds())
+    dispatch(getFeeds());
   }, [dispatch]);
 
   const handleGetFeeds = () => {

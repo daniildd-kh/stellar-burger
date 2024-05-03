@@ -1,19 +1,25 @@
 import { TConstructorIngredient, TIngredient } from '@utils-types';
 import { createSlice, nanoid, PayloadAction } from '@reduxjs/toolkit';
+import { orderBurger } from '../actions';
+import { TOrder } from '@utils-types';
 
 interface constructorState {
   bun: TConstructorIngredient | null;
   ingredients: TConstructorIngredient[];
+  orderRequest: boolean;
+  order: TOrder | null;
 }
 const initialState: constructorState = {
   bun: null,
-  ingredients: []
+  ingredients: [],
+  orderRequest: false,
+  order: null
 };
 
 type movedIndex = {
-  index: number,
-  newIndex: number
-}
+  index: number;
+  newIndex: number;
+};
 
 const constructorSlice = createSlice({
   name: 'constructor',
@@ -33,21 +39,42 @@ const constructorSlice = createSlice({
         }
       }
     ),
-    removeIngredient: create.reducer<string>(
-      (state, action) => {
-          state.ingredients = state.ingredients.filter(ingredient => ingredient.id !== action.payload)
-      }
-    ),
-    moveIngredient: create.reducer<movedIndex>(
-      (state, action) =>{
-        const { index, newIndex } = action.payload;
-        const movedIngredient = state.ingredients[index];
-        state.ingredients.splice(index, 1);
-        state.ingredients.splice(newIndex, 0, movedIngredient);
-      }
-    )
-  })
+    removeIngredient: create.reducer<string>((state, action) => {
+      state.ingredients = state.ingredients.filter(
+        (ingredient) => ingredient.id !== action.payload
+      );
+    }),
+    moveIngredient: create.reducer<movedIndex>((state, action) => {
+      const { index, newIndex } = action.payload;
+      const movedIngredient = state.ingredients[index];
+      state.ingredients.splice(index, 1);
+      state.ingredients.splice(newIndex, 0, movedIngredient);
+    }),
+    clearConstructor: create.reducer((state) => {
+      state.ingredients = [];
+      state.bun = null;
+    }),
+    clearOrder: create.reducer((state) => {
+      state.order = null;
+    })
+  }),
+  extraReducers: (builder) => {
+    builder
+      .addCase(orderBurger.pending, (state) => {
+        state.orderRequest = true;
+      })
+      .addCase(orderBurger.fulfilled, (state, action) => {
+        state.orderRequest = false;
+        state.order = action.payload.order;
+      });
+  }
 });
 
-export const { addIngredient, removeIngredient, moveIngredient} = constructorSlice.actions;
+export const {
+  addIngredient,
+  removeIngredient,
+  moveIngredient,
+  clearConstructor,
+  clearOrder
+} = constructorSlice.actions;
 export default constructorSlice.reducer;

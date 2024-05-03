@@ -10,9 +10,8 @@ import {
 import { NavLink } from 'react-router-dom';
 
 export const AppHeaderUI: FC<TAppHeaderUIProps> = ({ userName }) => {
-  const setLinkActive = ({ isActive }: { isActive: boolean }) => {
-    return isActive ? [styles.link, styles.link_active].join(' ') : styles.link;
-  }
+  const setLinkActive = ({ isActive }: { isActive: boolean }) =>
+    isActive ? [styles.link, styles.link_active].join(' ') : styles.link;
 
   return (
     <header className={styles.header}>
@@ -21,7 +20,9 @@ export const AppHeaderUI: FC<TAppHeaderUIProps> = ({ userName }) => {
           <>
             <NavLink to='/' className={setLinkActive}>
               <BurgerIcon type={'primary'} />
-              <p className='text text_type_main-default ml-2 mr-10'>Конструктор</p>
+              <p className='text text_type_main-default ml-2 mr-10'>
+                Конструктор
+              </p>
             </NavLink>
           </>
           <>
@@ -45,5 +46,5 @@ export const AppHeaderUI: FC<TAppHeaderUIProps> = ({ userName }) => {
         </div>
       </nav>
     </header>
-  )
+  );
 };

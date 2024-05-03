@@ -147,9 +147,9 @@ export const registerUserApi = (data: TRegisterData) =>
   fetch(`${URL}/auth/register`, {
     method: 'POST',
     headers: {
-      'Content-Type': 'application/json;charset=utf-8',
+      'Content-Type': 'application/json;charset=utf-8'
     },
-    body: JSON.stringify(data),
+    body: JSON.stringify(data)
   })
     .then((res) => checkResponse<TAuthResponse>(res))
     .then((data) => {
@@ -194,7 +194,7 @@ export const resetPasswordApi = (data: { password: string; token: string }) =>
   fetch(`${URL}/password-reset/reset`, {
     method: 'POST',
     headers: {
-      'Content-Type': 'application/json;charset=utf-8',
+      'Content-Type': 'application/json;charset=utf-8'
     },
     body: JSON.stringify(data)
   })
