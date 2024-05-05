@@ -17,13 +17,12 @@ import { createAsyncThunk } from '@reduxjs/toolkit';
 import { setIsAuthChecked, setUser } from './reducers/auth-slice';
 import { getCookie, deleteCookie, setCookie } from '../utils/cookie';
 
-export const getIngredients = createAsyncThunk('ingredients/getAll', async () =>
-  getIngredientsApi()
+export const getIngredients = createAsyncThunk(
+  'ingredients/getAll',
+  getIngredientsApi
 );
 
-export const getFeeds = createAsyncThunk('feeds/getAll', async () =>
-  getFeedsApi()
-);
+export const getFeeds = createAsyncThunk('feeds/getAll', getFeedsApi);
 
 export const login = createAsyncThunk(
   'auth/login',
@@ -55,8 +54,10 @@ export const checkUserAuth = createAsyncThunk(
 );
 
 export const logout = createAsyncThunk('auth/logout', async () => {
-  logoutApi();
-  localStorage.removeItem('refreshToken'), deleteCookie('accessToken');
+  logoutApi().then(() => {
+    localStorage.removeItem('refreshToken');
+    deleteCookie('accessToken');
+  });
 });
 
 export const register = createAsyncThunk(
@@ -69,15 +70,9 @@ export const register = createAsyncThunk(
   }
 );
 
-export const updateUser = createAsyncThunk(
-  'user/update',
-  async (newUserData: Partial<TRegisterData>) => updateUserApi(newUserData)
-);
+export const updateUser = createAsyncThunk('user/update', updateUserApi);
 
-export const ordersUser = createAsyncThunk('user/orders', async () => {
-  const res = await getOrdersApi();
-  return res;
-});
+export const ordersUser = createAsyncThunk('user/orders', getOrdersApi);
 
 export const orderByNumber = createAsyncThunk(
   'feeds/getByNumber',

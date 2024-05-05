@@ -23,6 +23,7 @@ export const BurgerConstructor: FC = () => {
   const onOrderClick = () => {
     if (!user) {
       navigate('/login');
+      return;
     }
     const { bun, ingredients } = constructorItems;
 

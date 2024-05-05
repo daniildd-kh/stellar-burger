@@ -1,8 +1,7 @@
 import { getErrorMessage, getUser } from '@selectors';
 import { ProfileUI } from '@ui-pages';
 import { FC, SyntheticEvent, useEffect, useState } from 'react';
-import { useSelector } from 'react-redux';
-import { useDispatch } from '../../services/store';
+import { useDispatch, useSelector } from '../../services/store';
 import { updateUser } from '../../services/actions';
 
 export const Profile: FC = () => {
