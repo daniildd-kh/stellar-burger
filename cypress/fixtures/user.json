@@ -1,0 +1,9 @@
+{
+  "success": true,
+  "accessToken": "access-test-token",
+  "refreshToken": "refresh-test-token",
+  "user": {
+    "email": "test@cy-test.ru",
+    "name": "Daniil"
+  }
+}

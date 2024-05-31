@@ -12,7 +12,7 @@ import authSlice from './reducers/auth-slice';
 import ordersUserSlice from './reducers/orders-slice';
 import orderNumberSlice from './reducers/order-number-slice';
 
-const rootReducer = combineReducers({
+export const rootReducer = combineReducers({
   ingredientsSlice,
   constructorSlice,
   feedsSlice,
