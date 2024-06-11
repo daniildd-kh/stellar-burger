@@ -1,5 +1,5 @@
 import { FC, useMemo } from 'react';
-import { TConstructorIngredient } from '@utils-types';
+import { TConstructorIngredient, TIngredient } from '@utils-types';
 import { BurgerConstructorUI } from '@ui';
 import { useDispatch, useSelector } from '../../services/store';
 import { getOrderRequest, getUser, getOrderData } from '@selectors';
@@ -33,7 +33,7 @@ export const BurgerConstructor: FC = () => {
 
     const order: string[] = [
       bun._id,
-      ...ingredients.map((ingredient) => ingredient._id),
+      ...ingredients.map((ingredient: TIngredient) => ingredient._id),
       bun._id
     ];
     dispatch(orderBurger(order));

@@ -3,7 +3,7 @@ import { createSlice, nanoid, PayloadAction } from '@reduxjs/toolkit';
 import { orderBurger } from '../actions';
 import { TOrder } from '@utils-types';
 
-interface constructorState {
+export interface constructorState {
   bun: TConstructorIngredient | null;
   ingredients: TConstructorIngredient[];
   orderRequest: boolean;

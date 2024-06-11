@@ -2,7 +2,7 @@ import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 import { TIngredient } from '@utils-types';
 import { getIngredients } from '../actions';
 
-interface ingredientState {
+export interface ingredientState {
   ingredients: TIngredient[];
   isLoading: boolean;
   error: string | undefined;
